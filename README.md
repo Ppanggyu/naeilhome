@@ -79,7 +79,3 @@
 - **주문 배송 목록 페이지 구현** - 결제 완료 시 구매취소, 배송 완료 시 구매확정과 반품/교환신청, 구매확정 시 리뷰작성
 - **취소/반품/교환 신청 페이지 구현** - 반품/교환 시 다중 파일 업로드, 미리보기, 개별삭제, 전체삭제
 
-
-## 5. 소셜 로그인 API 설명
-- **기본적인 원리** - 출처:<[Kakao Developer](https://developers.kakao.com/docs/latest/ko/kakaologin/common#login-seq)>
-<img src="https://developers.kakao.com/docs/latest/ko/assets/style/images/kakaologin/kakaologin_process.png" />
