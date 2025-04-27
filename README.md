@@ -22,27 +22,27 @@
 - Infra : <img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white" /> <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" />
 
 ## 3. 주요 기능
-### 본인인증 방식 : 카카오/네이버/구글 API, SMTP(이메일) 인증
+### * 본인인증 방식 : 카카오/네이버/구글 API, SMTP(이메일) 인증
 <img src="/image/login1.png" width="500px"/><img src="/image/login2.png" width="500px"/>
 ***
 
-### 커뮤니티 게시글 작성 : DragAndDrop API, SummerNote
+### * 커뮤니티 게시글 작성 : DragAndDrop API, SummerNote
 <img src="/image/write_board1.png" width="500px"/><img src="/image/write_board2.png" width="500px"/>
 ***
 
-### 커뮤니티 댓글 작성 : AJAX
+### * 커뮤니티 댓글 작성 : AJAX
 <img src="/image/reply1.png" width="500px"/>
 ***
 
-### 주문 페이지 : 기본 배송지 / 배송지 입력(Daum 주소검색 API)
+### * 주문 페이지 : 기본 배송지 / 배송지 입력(Daum 주소검색 API)
 <img src="/image/pay1.png" width="500px"/><img src="/image/pay2.png" width="500px"/>
 ***
 
-### 장바구니
+### * 장바구니
 <img src="/image/basket.png" width="500px"/>
-***
+ ***
 
-### 리뷰작성 / 상품 상세 페이지 리뷰
+### * 리뷰작성 / 상품 상세 페이지 리뷰
 <img src="/image/write_review1.png" width="500px"/><img src="/image/write_review2.png" width="500px"/>
 ***
 
