@@ -23,4 +23,4 @@
 
 ## 3. 주요 기능
 ### 본인인증 방식 : 카카오/네이버/구글 API, SMTP(이메일) 인증
-<img src="/image/login1.png" />
+<img src="/image/login1.png" width="500px"/>
