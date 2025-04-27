@@ -82,3 +82,4 @@
 
 ## 5. 소셜 로그인 API 설명
 - **기본적인 원리** - 출처:<[Kakao Developer](https://developers.kakao.com/docs/latest/ko/kakaologin/common#login-seq)>
+<img src="https://developers.kakao.com/docs/latest/ko/assets/style/images/kakaologin/kakaologin_process.png" />
