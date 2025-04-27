@@ -45,7 +45,7 @@
 
 ---
 ### 커뮤니티 댓글 작성 : AJAX
-<img src="/image/reply1.png" width="500px"/>
+<img src="/image/reply1.png" width="100%"/>
 
 ---
 ### 주문 페이지 : 기본 배송지 / 배송지 입력(Daum 주소검색 API)
@@ -53,7 +53,7 @@
 
 ---
 ### 장바구니
-<img src="/image/basket.png" width="500px"/>
+<img src="/image/basket.png" width="100%"/>
 
 ---
 ### 리뷰작성 / 상품 상세 페이지 리뷰
