@@ -4,6 +4,8 @@
 
 - 프로젝트명 : 내일의집(naeilhome)
 
+- 벤치마킹 : 오늘의 집
+
 - 개발 기간 : 2025.02.28 ~ 2025.04.25
 
 - 개발 인원 : 5명
@@ -20,4 +22,5 @@
 - Infra : <img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white" /> <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" />
 
 ## 3. 주요 기능
+### 본인인증 방식 : 카카오/네이버/구글 API, SMTP(이메일) 인증
 
