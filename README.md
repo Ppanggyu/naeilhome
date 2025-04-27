@@ -5,6 +5,11 @@
 
 통계청 출처: <https://kostat.go.kr/board.es?mid=a10301020600&bid=207>
 
+## 0. 목차
+- 1. 프로젝트 개요
+- 2. 프로젝트 사용 기술
+- 3. 주요기능
+- 4. 역할
 
 ## 1. 프로젝트 개요
 
@@ -21,7 +26,7 @@
 
 - 배포 주소 : <http://www.naeilhome.p-e.kr/>
 
-## 2. 프로젝트 기술
+## 2. 프로젝트 사용 기술
 - Backend : <img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white" />
 
 - Frontend : <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white" /> <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" /> <img src="https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white" /><b> with AJAX </b><img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" /><b> with JSTL, Tiles</b>
