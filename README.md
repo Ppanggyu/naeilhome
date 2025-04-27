@@ -10,7 +10,7 @@
 
 ## 2. 프로젝트 기술
 - Backend : SpringBoot
- 
+ <img src=https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white />
 - Frontend : HTML5, CSS3, JQuery, AJAX, JSTL, JSP, Tiles
  
 - RDBMS : Oracle
