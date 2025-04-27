@@ -19,6 +19,8 @@
 
 - 개발 인원 : 5명
 
+- 배포 주소 : <http://www.naeilhome.p-e.kr/>
+
 ## 2. 프로젝트 기술
 - Backend : <img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white" />
 
