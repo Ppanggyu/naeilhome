@@ -8,4 +8,16 @@
 
 - 개발 인원 : 5명
 
+## 2. 프로젝트 기술
+- Backend : SpringBoot
+ 
+- Frontend : HTML5, CSS3, JQuery, AJAX, JSTL, JSP, Tiles
+ 
+- RDBMS : Oracle
+ 
+- DevOps : Git, GitHub, Docker
+ 
+- Infra : AWS EC2, Ubuntu
+
+## 3. 주요 기능
 
