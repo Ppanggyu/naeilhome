@@ -23,4 +23,19 @@
 
 ## 3. 주요 기능
 ### 본인인증 방식 : 카카오/네이버/구글 API, SMTP(이메일) 인증
-<img src="/image/login1.png" width="500px"/>
+<img src="/image/login1.png" width="500px"/><img src="/image/login2.png"/>
+
+### 커뮤니티 게시글 작성 : DragAndDrop API, SummerNote
+<img src="/image/write_board1.png" /><img src="/image/write_board2.png" />
+
+### 커뮤니티 댓글 작성 : AJAX
+<img src="/image/reply1.png" />
+
+### 주문 페이지 : 기본 배송지 / 배송지 입력(Daum 주소검색 API)
+<img src="/image/pay1.png" /><img src="/image/pay2.png" />
+
+### 장바구니
+<img src="/image/basket.png" />
+
+### 리뷰작성 / 상품 상세 페이지 리뷰
+<img src="/image/write_review1.png" /><img src="/image/write_review2.png" />
