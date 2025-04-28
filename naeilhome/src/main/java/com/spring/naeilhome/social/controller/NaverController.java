@@ -30,7 +30,8 @@ public class NaverController {
 	@Value("${api.naver.client-secret}")
 	private String CLIENT_SECRET;
 
-    private final String REDIRECT_URI = "http://www.naeilhome.kro.kr/naver/callback.do";
+//    private final String REDIRECT_URI = "http://www.naeilhome.kro.kr/naver/callback.do";
+    private final String REDIRECT_URI = "http://www.naeilhome.p-e.kr/naver/callback.do";
 
     @Autowired
     private NaverService naverService;
