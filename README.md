@@ -74,11 +74,11 @@
 <br>
 ## 4. 프로젝트 구조
 <a href="naeilhome/Architecture">프로젝트구조</a>
-<br>
+
 ## 5. ERD
 <img src="/image/2025.04.23_ERD.drawio.png" width="100%"/>
 총 테이블 수 <b>20</b>
-<br>
+
 ## 6. 이벤트 기반 DB 처리 (Trigger, Cascade)
 ### Trigger 작동 시점
 회원 가입 시 포인트 추가
@@ -103,7 +103,7 @@
 회원 탈퇴 시 작동<br>
 작성한 게시글, 댓글, 리뷰의 출력되는 닉네임이 '탈퇴회원'으로 변경<br>
 그 외의 모든 데이터는 삭제
-<br>
+
 ## 7. 역할
 - **데이터베이스 설계 및 총괄** - PK, FK, Sequence, Trigger 등등 Oracle DB 담당
 - **카카오 로그인/회원가입 API, Daum 주소검색 API 구현**
