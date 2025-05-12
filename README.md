@@ -51,7 +51,7 @@
 ### 본인인증 방식 : 카카오/네이버/구글 API, SMTP(이메일) 인증
 <img src="/image/login1.jpg" width="100%" />
 <img src="/image/login3.png" />
-
+## 
 ---
 ### 커뮤니티 게시글 작성 : DragAndDrop API, SummerNote
 <img src="/image/write_board1.png" width="100%"/>
