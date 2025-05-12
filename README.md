@@ -71,7 +71,7 @@
 ---
 ### 리뷰작성 / 상품 상세 페이지 리뷰
 <img src="/image/write_review1.png" width="100%"/>
-<br>
+
 ## 4. 프로젝트 구조
 <a href="naeilhome/Architecture">프로젝트구조</a>
 
