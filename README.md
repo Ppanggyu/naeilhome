@@ -77,7 +77,7 @@
 ## 5. ERD
 <img src="/image/2025.04.23_ERD.drawio.png" width="100%"/>
 
-## 5. 역할
+## 6. 역할
 - **데이터베이스 설계 및 총괄** - PK, FK, Sequence, Trigger 등등 Oracle DB 담당
 - **카카오 로그인/회원가입 API, Daum 주소검색 API 구현**
 - **회원가입 구현** - 기입란에 맞지 않는 입력 감지필터, 아이디/닉네임 중복확인(Ajax), 주소 입력란 Daum 주소검색 API 이용
