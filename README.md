@@ -4,7 +4,8 @@
 또한, 커뮤니티 게시판을 추가하여 구매자가 <b>커뮤니티에서 다른 사람들의 구매 후기, 배치사진 등을 보면서 제품에 대한 신뢰가 쌓이고 바로 쇼핑으로 이어질 가능성을 높이기 위함</b> 입니다.<br>
 
 🌐 배포 주소 [http://www.naeilhome.p-e.kr/](http://www.naeilhome.p-e.kr/)
-
+임시 계정 : gami / 1234
+Notion : [My Study Note(notion)](https://curse-fluorine-6b5.notion.site/1e0e7b48ea5a80b5adb8e17ae8eccf21?pvs=74)
 ## 0. 목차
 1. [프로젝트 개요](#1-프로젝트-개요)
 2. [프로젝트 사용 기술](#2-프로젝트-사용-기술)
