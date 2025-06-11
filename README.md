@@ -5,7 +5,7 @@
 
 🌐 배포 주소 [http://www.naeilhome.p-e.kr/](http://www.naeilhome.p-e.kr/)
 <br>임시 계정 : gami / 1234<br>
-<br>Notion : [My Study Note(notion)](https://curse-fluorine-6b5.notion.site/1e0e7b48ea5a80b5adb8e17ae8eccf21?pvs=74)<br>
+<br>Notion이력서 : [Notion resume](https://curse-fluorine-6b5.notion.site/1e0e7b48ea5a80b5adb8e17ae8eccf21?pvs=74)<br>
 ## 0. 목차
 1. [프로젝트 개요](#1-프로젝트-개요)
 2. [프로젝트 사용 기술](#2-프로젝트-사용-기술)
