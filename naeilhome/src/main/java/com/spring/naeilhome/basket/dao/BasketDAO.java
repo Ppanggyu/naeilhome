@@ -5,9 +5,7 @@ import java.util.Map;
 
 import com.spring.naeilhome.basket.domain.BasketDomain;
 import com.spring.naeilhome.basket.vo.BasketVO;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface BasketDAO {
 	
 	public List<BasketDomain> myBasketList(String memberId) throws Exception;
