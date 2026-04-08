@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.spring.naeilhome.review.domain.ReviewDomain;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ReviewDAO {
 
 	// 리뷰 게시글 조회
