@@ -192,7 +192,7 @@
     <insert id="coverImagePath" parameterType="map">
 	    <![CDATA[
 	        INSERT INTO image (imageNo, articleNo, imageFilename, imageUpdated, imageType)
-	        			VALUES (image_seq.NEXTVAL, #{articleNo}, #{imageFilename}, SYSDATE, '커버')
+	        			VALUES (image_seq.nextval('image_seq'), #{articleNo}, #{imageFilename}, SYSDATE, '커버')
 	    ]]>
 	</insert>
 	
