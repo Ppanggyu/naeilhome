@@ -3,7 +3,9 @@ package com.spring.naeilhome.main.dao;
 import java.util.List;
 
 import com.spring.naeilhome.main.domain.MainDomain;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface MainDAO {
 
 	// 최신 상품 4개를 조회 (productUpdated 내림차순)
