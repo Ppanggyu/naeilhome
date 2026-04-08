@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.naeilhome.board.board_myhome.domain.MyhomeDomain;
 
-@Repository("bookMarkDAO")
+
 public interface BookMarkDAO {
 
 	public List<MyhomeDomain> selectBookMarkList(Map<String, Object> myhomeMap) throws DataAccessException;
