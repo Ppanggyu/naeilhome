@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.naeilhome.member.domain.MemberDomain;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 @Repository("kakaoDAO")
 public class KakaoDAO {
 	
