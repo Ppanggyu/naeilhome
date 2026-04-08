@@ -6,7 +6,9 @@ import org.springframework.dao.DataAccessException;
 
 import com.spring.naeilhome.member.domain.MemberDomain;
 
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface MemberDAO {
 
 	 public MemberDomain loginById(MemberDomain memberDomain) throws DataAccessException;
