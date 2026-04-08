@@ -19,14 +19,14 @@
 	<insert id="addCre" parameterType="java.util.Map">
 		<![CDATA[
 			INSERT INTO cre (creNO, memberId, orderNo, productNo, creStatement, creReason, creType)
-			VALUES (CRE_SEQ.nextVal, #{memberId}, #{orderNo}, #{productNo}, #{creStatement}, #{creReason}, #{creType})
+			VALUES (CRE_SEQ.nextval('cre_seq'), #{memberId}, #{orderNo}, #{productNo}, #{creStatement}, #{creReason}, #{creType})
 		]]>
 	</insert>
 	
 	<insert id="addCreImage" parameterType="java.util.Map">
 		<![CDATA[
 			INSERT INTO image (imageNo, articleNo, imageFilename, imageType)
-			VALUES (IMAGE_SEQ.nextVal, (SELECT creNO FROM cre WHERE memberId = #{memberId} AND orderNo = #{orderNo} AND productNo = #{productNo}),
+			VALUES (IMAGE_SEQ.nextval('image_seq'), (SELECT creNO FROM cre WHERE memberId = #{memberId} AND orderNo = #{orderNo} AND productNo = #{productNo}),
 					#{imageFilename}, 'cre')
 		]]>
 	</insert>
