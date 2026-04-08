@@ -7,7 +7,9 @@ import org.springframework.dao.DataAccessException;
 
 import com.spring.naeilhome.board.board_myhome.domain.MyhomeDomain;
 import com.spring.naeilhome.mypage.myhome.domain.MyPageMyhomeDomain;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface LikeDAO {
 
 	public List<MyPageMyhomeDomain> selectLikeList(Map<String, Object> pagingMap) throws DataAccessException;
