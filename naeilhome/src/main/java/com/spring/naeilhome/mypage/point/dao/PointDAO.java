@@ -3,9 +3,7 @@ package com.spring.naeilhome.mypage.point.dao;
 import java.util.List;
 
 import com.spring.naeilhome.mypage.point.domain.PointDomain;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface PointDAO {
 
 	// 로그인한 회원의 포인트 정보를 조회
