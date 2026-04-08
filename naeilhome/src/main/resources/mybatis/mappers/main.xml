@@ -16,7 +16,6 @@
 		<result property="memberNickName" column="memberNickName"/> 
 		<result property="imageFileName" column="imageFileName" />
 		
-		
 		<result property="boardMyhomeArticleNo" column="boardMyhomeArticleNo" />
 		<result property="boardMyhomeTitle" column="boardMyhomeTitle" />
 		<result property="memberId" column="memberId" />
@@ -38,20 +37,23 @@
                 productUpdated,
                 (SELECT imageFilename
                 	FROM image
-                	WHERE articleNo = productNo AND imageType = '상품' AND ROWNUM = 1) AS imageFileName
-                	FROM (
-              			SELECT productNo,
-                     	productName,
-                     	productDescription,
-                     	productPrice,
-                    	productUpdated,
-                     	ROW_NUMBER() OVER (PARTITION BY productName ORDER BY productUpdated DESC) AS rn
-              		FROM product
-					)
-        			WHERE rn = 1
-        ORDER BY productUpdated DESC
-      	)
-      	WHERE ROWNUM <= 5
+                	WHERE articleNo = productNo 
+                		AND imageType = '상품'
+                	ORDER BY imageNo ASC
+                	LIMIT 1) AS imageFileName
+        	FROM (
+              	SELECT productNo,
+                      productName,
+                      productDescription,
+                      productPrice,
+                      productUpdated,
+                      ROW_NUMBER() OVER (PARTITION BY productName ORDER BY productUpdated DESC) AS rn
+              	FROM product
+			) sub
+        	WHERE rn = 1
+        	ORDER BY productUpdated DESC
+      	) final
+      	LIMIT 5
     ]]>
     </select>
     
@@ -74,11 +76,12 @@
                FROM image 
               WHERE articleNo = b.boardMyhomeArticleNo 
                 AND imageType = '커버'
-                AND ROWNUM = 1) AS imageFileName
+              ORDER BY imageNo ASC
+              LIMIT 1) AS imageFileName
          FROM boardMyhome b
          ORDER BY b.boardMyhomeLikes DESC
-      )
-      WHERE ROWNUM <= 5
+      ) final
+      LIMIT 5
 	]]>
 	</select>
 	
@@ -107,21 +110,22 @@
 	                     FROM image 
 	                    WHERE articleNo = p.productNo 
 	                      AND imageType = '상품' 
-	                      AND ROWNUM = 1) AS imageFileName,
-	                  NVL(SUM(oj.orderQty), 0) AS totalOrderQty
+	                    ORDER BY imageNo ASC
+	                    LIMIT 1) AS imageFileName,
+	                  COALESCE(SUM(oj.orderQty), 0) AS totalOrderQty
 	              FROM product p
 	              LEFT JOIN ordersJoin oj ON p.productNo = oj.productNo
 	              GROUP BY p.productNo, p.productName, p.productDescription, p.productPrice
 	          ) t
-	      )
+	      ) sub
 	      WHERE rn = 1
 	      ORDER BY totalOrderQty DESC
-	  )
-	  WHERE ROWNUM <= 5
+	  ) final
+	  LIMIT 5
 	]]>
 	</select>
     
-    <!-- 상품 검색 (키워드 productName)-->
+    <!-- 상품 검색 (키워드 productName) -->
 	<select id="searchProducts" resultMap="mainResult">
 	<![CDATA[
 	    SELECT *
@@ -136,12 +140,13 @@
 	            FROM image
 	           WHERE articleNo = p.productNo 
 	             AND imageType = '상품'
-	             AND ROWNUM = 1) AS imageFileName,
+	           ORDER BY imageNo ASC
+	           LIMIT 1) AS imageFileName,
 	         ROW_NUMBER() OVER (PARTITION BY p.productName ORDER BY p.productUpdated DESC) AS rn
 	      FROM product p
 	      WHERE UPPER(p.productName) LIKE '%' || UPPER(#{keyword}) || '%'
 	         OR UPPER(p.productDescription) LIKE '%' || UPPER(#{keyword}) || '%'
-	    )
+	    ) sub
 	    WHERE rn = 1
 	]]>
 	</select>
@@ -152,14 +157,15 @@
 	  SELECT 
 	    b.boardMyhomeArticleNo, 
 	    b.boardMyhomeTitle, 
-	    b.boardMyhomeContents   AS productDescription, 
-	    NULL                   AS productPrice, 
+	    b.boardMyhomeContents AS productDescription, 
+	    NULL AS productPrice, 
 	    b.boardMyhomeUpdated,
 	    (SELECT imageFilename 
 	       FROM image 
-	      WHERE articleNo   = b.boardMyhomeArticleNo 
-	        AND imageType   = '커버' 
-	        AND ROWNUM      = 1) AS imageFileName,
+	      WHERE articleNo = b.boardMyhomeArticleNo 
+	        AND imageType = '커버' 
+	      ORDER BY imageNo ASC
+	      LIMIT 1) AS imageFileName,
 	    b.memberId,
 	    m.memberNickName,
 	    b.boardMyhomeLikes, 
@@ -184,7 +190,7 @@
 	    SELECT DISTINCT REGEXP_REPLACE(boardMyhomeTitle, '<[^>]*>', '') AS suggestion
 	      FROM boardMyhome
 	     WHERE UPPER(REGEXP_REPLACE(boardMyhomeTitle, '<[^>]*>', '')) LIKE '%' || UPPER(#{keyword}) || '%'
-	  )
+	  ) final
 	  ORDER BY suggestion
 	]]>
 	</select>
