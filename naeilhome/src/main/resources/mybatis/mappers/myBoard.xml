@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.myBoard">
-    
+
     <!-- Result Map 정의 -->
     <resultMap id="MyBoardResultMap" type="com.spring.naeilhome.board.board_myhome.domain.MyhomeDomain">
         <id property="boardMyhomeArticleNo" column="boardMyhomeArticleNo"/>
@@ -14,54 +14,50 @@
         <result property="boardMyhomeViews" column="boardMyhomeViews"/>
         <result property="boardMyhomeUpdated" column="boardMyhomeUpdated"/>
         <result property="boardMyhomeHomeSize" column="boardMyhomeHomeSize"/>
-        <result property="boardMyhomeHousingType" column="boardMyhomeHousingType"/> <!-- 수정 -->
-        <result property="startRow" column="startRow"/> <!-- 페이징 추가 -->
-        <result property="endRow" column="endRow"/> <!-- 페이징 -->
-        <result property="imageFileName" column="imageFileName"/> 
+        <result property="boardMyhomeHousingType" column="boardMyhomeHousingType"/>
+        <result property="startRow" column="startRow"/>
+        <result property="endRow" column="endRow"/>
+        <result property="imageFileName" column="imageFileName"/>
+        <result property="memberNickName" column="memberNickName"/>
+        <result property="totalReply" column="totalReply"/>
     </resultMap>
-    
-    <!-- 나의 게시글 조회 -->
-<select id="selectMyArticlesList" resultMap="MyBoardResultMap" parameterType="map">
-<![CDATA[
-SELECT * FROM (
-SELECT b.*, i.imageFilename, ROWNUM as rnum,(
-	Select memberNickName
-	FROM member
-	WHERE memberId = #{memberId}  
-) AS memberNickName,
-(
-SELECT Count(replyNo)
-From reply
-where boardMyhomeArticleNo = b.boardMyhomeArticleNo
-) as totalReply
-FROM (
-            SELECT * 
-            FROM boardMyhome 
-            WHERE memberId = #{memberId} 
-            ORDER BY boardMyhomeUpdated DESC
-) b
-LEFT JOIN image i ON b.boardMyhomeArticleNo = i.articleNo AND i.imageType = '커버'
-WHERE ROWNUM <= #{endRow}  
-) 
-WHERE rnum >= #{startRow}
-]]>
-</select>
-	
-<!-- 전체 페이지 수 -->
-<select id="selectTotArticle" resultType="int">
-<![CDATA[
-select count(*) from boardMyhome where memberId= #{memberId}
-]]>
-</select>
 
-<!-- 상대방 정보 조회 -->
-<select id="yourIdInfo" resultType="map" parameterType="String">
-<![CDATA[
-select memberId, memberNickName, memberImage
-from member
-where memberId = #{yourId}
-]]>
+    <!-- 나의 게시글 조회 (PostgreSQL 페이징 적용) -->
+    <select id="selectMyArticlesList" resultMap="MyBoardResultMap" parameterType="map">
+        <![CDATA[
+        SELECT b.*, i.imageFilename,
+               m.memberNickName,
+               (SELECT COUNT(replyNo)
+                FROM reply r
+                WHERE r.boardMyhomeArticleNo = b.boardMyhomeArticleNo) AS totalReply
+        FROM boardMyhome b
+        LEFT JOIN image i 
+               ON b.boardMyhomeArticleNo = i.articleNo 
+               AND i.imageType = '커버'
+        LEFT JOIN member m
+               ON b.memberId = m.memberId
+        WHERE b.memberId = #{memberId}
+        ORDER BY b.boardMyhomeUpdated DESC
+        LIMIT #{endRow} OFFSET #{startRowMinusOne}
+        ]]>
+    </select>
 
-</select>
-	    
+    <!-- 전체 게시글 수 -->
+    <select id="selectTotArticle" resultType="int">
+        <![CDATA[
+        SELECT COUNT(*) 
+        FROM boardMyhome
+        WHERE memberId = #{memberId}
+        ]]>
+    </select>
+
+    <!-- 상대방 정보 조회 -->
+    <select id="yourIdInfo" resultType="map" parameterType="String">
+        <![CDATA[
+        SELECT memberId, memberNickName, memberImage
+        FROM member
+        WHERE memberId = #{yourId}
+        ]]>
+    </select>
+
 </mapper>
