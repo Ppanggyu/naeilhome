@@ -2,7 +2,9 @@ package com.spring.naeilhome.order.dao;
 
 import com.spring.naeilhome.order.domain.OrderDomain;
 import com.spring.naeilhome.order.domain.OrderJoinDomain;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface OrderDAO {
 
 	OrderDomain getUserInfo(String memberId);
