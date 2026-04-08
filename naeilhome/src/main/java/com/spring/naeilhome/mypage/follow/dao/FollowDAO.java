@@ -7,7 +7,9 @@ import org.springframework.dao.DataAccessException;
 
 import com.spring.naeilhome.member.domain.MemberDomain;
 import com.spring.naeilhome.mypage.follow.domain.FollowDomain;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface FollowDAO {
 
 	// 팔로우 추가
