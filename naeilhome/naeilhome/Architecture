@@ -1,0 +1,998 @@
+C:.
+│  .gitattributes
+│  .gitignore
+│  mvnw
+│  mvnw.cmd
+│  pom.xml
+│  structure.txt
+│  
+├─.mvn
+│  └─wrapper
+│          maven-wrapper.properties
+│          
+├─bin
+│  │  .gitattributes
+│  │  .gitignore
+│  │  mvnw
+│  │  mvnw.cmd
+│  │  pom.xml
+│  │  README.md
+│  │  
+│  ├─.mvn
+│  │  └─wrapper
+│  │          maven-wrapper.properties
+│  │          
+│  └─src
+│      ├─main
+│      │  ├─java
+│      │  │  └─com
+│      │  │      └─spring
+│      │  │          └─naeilhome
+│      │  │              │  NaeilhomeApplication.class
+│      │  │              │  
+│      │  │              ├─basket
+│      │  │              │  ├─controller
+│      │  │              │  │      BasketController.class
+│      │  │              │  │      
+│      │  │              │  ├─dao
+│      │  │              │  │      BasketDAO.class
+│      │  │              │  │      BasketDAOImpl.class
+│      │  │              │  │      
+│      │  │              │  ├─domain
+│      │  │              │  │      BasketDomain.class
+│      │  │              │  │      
+│      │  │              │  ├─service
+│      │  │              │  │      BasketService.class
+│      │  │              │  │      BasketServiceImpl.class
+│      │  │              │  │      
+│      │  │              │  └─vo
+│      │  │              │          BasketVO.class
+│      │  │              │          
+│      │  │              ├─board
+│      │  │              │  ├─board_myhome
+│      │  │              │  │  ├─controller
+│      │  │              │  │  │      MyhomeController.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─dao
+│      │  │              │  │  │      MyhomeDAO.class
+│      │  │              │  │  │      MyhomeDAOImpl.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─domain
+│      │  │              │  │  │      MyhomeDomain.class
+│      │  │              │  │  │      
+│      │  │              │  │  └─service
+│      │  │              │  │          MyhomeService.class
+│      │  │              │  │          MyhomeServiceImpl.class
+│      │  │              │  │          
+│      │  │              │  ├─board_notice
+│      │  │              │  │  ├─controller
+│      │  │              │  │  │      NoticeController.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─dao
+│      │  │              │  │  │      NoticeDAO.class
+│      │  │              │  │  │      NoticeDAOImpl.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─domain
+│      │  │              │  │  │      NoticeDomain.class
+│      │  │              │  │  │      
+│      │  │              │  │  └─service
+│      │  │              │  │          NoticeService.class
+│      │  │              │  │          NoticeServiceImpl.class
+│      │  │              │  │          
+│      │  │              │  ├─board_question
+│      │  │              │  │  ├─controller
+│      │  │              │  │  │      QuestionController.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─dao
+│      │  │              │  │  │      QuestionDAO.class
+│      │  │              │  │  │      QuestionDAOImpl.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─domain
+│      │  │              │  │  │      QuestionDomain.class
+│      │  │              │  │  │      
+│      │  │              │  │  └─service
+│      │  │              │  │          QuestionService.class
+│      │  │              │  │          QuestionServiceImpl.class
+│      │  │              │  │          
+│      │  │              │  └─reply
+│      │  │              │      ├─controller
+│      │  │              │      │      ReplyController.class
+│      │  │              │      │      
+│      │  │              │      ├─dao
+│      │  │              │      │      ReplyDAO.class
+│      │  │              │      │      ReplyDAOImpl.class
+│      │  │              │      │      
+│      │  │              │      ├─domain
+│      │  │              │      │      ReplyDomain.class
+│      │  │              │      │      
+│      │  │              │      └─service
+│      │  │              │              ReplyService.class
+│      │  │              │              ReplyServiceImpl.class
+│      │  │              │              
+│      │  │              ├─config
+│      │  │              │      Configurations.class
+│      │  │              │      WebConfig.class
+│      │  │              │      
+│      │  │              ├─cre
+│      │  │              │  ├─controller
+│      │  │              │  │      CREController.class
+│      │  │              │  │      
+│      │  │              │  ├─dao
+│      │  │              │  │      CreDAO.class
+│      │  │              │  │      CreDAOImpl.class
+│      │  │              │  │      
+│      │  │              │  ├─domain
+│      │  │              │  │      CreDomain.class
+│      │  │              │  │      
+│      │  │              │  └─service
+│      │  │              │          CreService.class
+│      │  │              │          CreServiceImpl.class
+│      │  │              │          
+│      │  │              ├─image
+│      │  │              │      ImageDomain.class
+│      │  │              │      
+│      │  │              ├─mail
+│      │  │              │  ├─controller
+│      │  │              │  │      MailController.class
+│      │  │              │  │      
+│      │  │              │  └─service
+│      │  │              │          MailService.class
+│      │  │              │          MailServiceImpl.class
+│      │  │              │          
+│      │  │              ├─main
+│      │  │              │  ├─controller
+│      │  │              │  │      MainController.class
+│      │  │              │  │      
+│      │  │              │  ├─dao
+│      │  │              │  │      MainDAO.class
+│      │  │              │  │      MainDAOImpl.class
+│      │  │              │  │      
+│      │  │              │  ├─domain
+│      │  │              │  │      MainDomain.class
+│      │  │              │  │      
+│      │  │              │  └─service
+│      │  │              │          MainService.class
+│      │  │              │          MainServiceImpl.class
+│      │  │              │          
+│      │  │              ├─member
+│      │  │              │  ├─controller
+│      │  │              │  │      MemberController.class
+│      │  │              │  │      
+│      │  │              │  ├─dao
+│      │  │              │  │      MemberDAO.class
+│      │  │              │  │      MemberDAOImpl.class
+│      │  │              │  │      
+│      │  │              │  ├─domain
+│      │  │              │  │      MemberDomain.class
+│      │  │              │  │      
+│      │  │              │  └─service
+│      │  │              │          MemberService.class
+│      │  │              │          MemberServiceImpl.class
+│      │  │              │          
+│      │  │              ├─mypage
+│      │  │              │  ├─bookmark
+│      │  │              │  │  ├─controller
+│      │  │              │  │  │      BookMarkController.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─dao
+│      │  │              │  │  │      BookMarkDAO.class
+│      │  │              │  │  │      BookMarkDAOImpl.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─domain
+│      │  │              │  │  │      BookMarkDomain.class
+│      │  │              │  │  │      
+│      │  │              │  │  └─service
+│      │  │              │  │          BookMarkService.class
+│      │  │              │  │          BookMarkServiceImpl.class
+│      │  │              │  │          
+│      │  │              │  ├─delivery
+│      │  │              │  │  ├─controller
+│      │  │              │  │  │      DeliveryController.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─dao
+│      │  │              │  │  │      DeliveryDAO.class
+│      │  │              │  │  │      DeliveryDAOImpl.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─domain
+│      │  │              │  │  │      DeliveryDomain.class
+│      │  │              │  │  │      
+│      │  │              │  │  └─service
+│      │  │              │  │          DeliveryService.class
+│      │  │              │  │          DeliveryServiceImpl.class
+│      │  │              │  │          
+│      │  │              │  ├─follow
+│      │  │              │  │  ├─controller
+│      │  │              │  │  │      FollowController.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─dao
+│      │  │              │  │  │      FollowDAO.class
+│      │  │              │  │  │      FollowDAOImpl.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─domain
+│      │  │              │  │  │      FollowDomain.class
+│      │  │              │  │  │      
+│      │  │              │  │  └─service
+│      │  │              │  │          FollowService.class
+│      │  │              │  │          FollowServiceImpl.class
+│      │  │              │  │          
+│      │  │              │  ├─like
+│      │  │              │  │  ├─controller
+│      │  │              │  │  │      LikeController.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─dao
+│      │  │              │  │  │      LikeDAO.class
+│      │  │              │  │  │      LikeDAOImpl.class
+│      │  │              │  │  │      
+│      │  │              │  │  └─service
+│      │  │              │  │          LikeService.class
+│      │  │              │  │          LikeServiceImpl.class
+│      │  │              │  │          
+│      │  │              │  ├─myhome
+│      │  │              │  │  ├─controller
+│      │  │              │  │  │      MyPageMyhomeController.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─dao
+│      │  │              │  │  │      MyPageMyhomeDAO.class
+│      │  │              │  │  │      MyPageMyhomeDAOImpl.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─domain
+│      │  │              │  │  │      MyPageMyhomeDomain.class
+│      │  │              │  │  │      
+│      │  │              │  │  └─service
+│      │  │              │  │          MyPageMyhomeService.class
+│      │  │              │  │          MyPageMyhomeServiceImpl.class
+│      │  │              │  │          
+│      │  │              │  ├─point
+│      │  │              │  │  ├─controller
+│      │  │              │  │  │      PointController.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─dao
+│      │  │              │  │  │      PointDAO.class
+│      │  │              │  │  │      PointDAOImpl.class
+│      │  │              │  │  │      
+│      │  │              │  │  ├─domain
+│      │  │              │  │  │      PointDomain.class
+│      │  │              │  │  │      
+│      │  │              │  │  └─service
+│      │  │              │  │          PointService.class
+│      │  │              │  │          PointServiceImpl.class
+│      │  │              │  │          
+│      │  │              │  └─wishlist
+│      │  │              │      ├─controller
+│      │  │              │      │      WishListController.class
+│      │  │              │      │      
+│      │  │              │      ├─dao
+│      │  │              │      │      WishListDAO.class
+│      │  │              │      │      WishListDAOImpl.class
+│      │  │              │      │      
+│      │  │              │      ├─domain
+│      │  │              │      │      WishListDomain.class
+│      │  │              │      │      
+│      │  │              │      └─service
+│      │  │              │              WishListService.class
+│      │  │              │              WishListServiceImpl.class
+│      │  │              │              
+│      │  │              ├─order
+│      │  │              │  ├─controller
+│      │  │              │  │      OrderController.class
+│      │  │              │  │      
+│      │  │              │  ├─dao
+│      │  │              │  │      OrderDAO.class
+│      │  │              │  │      OrderDAOImpl.class
+│      │  │              │  │      
+│      │  │              │  ├─domain
+│      │  │              │  │      OrderDomain.class
+│      │  │              │  │      OrderJoinDomain.class
+│      │  │              │  │      
+│      │  │              │  └─service
+│      │  │              │          OrderService.class
+│      │  │              │          OrderServiceImpl.class
+│      │  │              │          
+│      │  │              ├─product
+│      │  │              │  ├─controller
+│      │  │              │  │      ProductController.class
+│      │  │              │  │      
+│      │  │              │  ├─dao
+│      │  │              │  │      ProductDAO.class
+│      │  │              │  │      ProductDAOImpl.class
+│      │  │              │  │      
+│      │  │              │  ├─domain
+│      │  │              │  │      ProductDomain.class
+│      │  │              │  │      
+│      │  │              │  └─service
+│      │  │              │          ProductService.class
+│      │  │              │          ProductServiceimpl.class
+│      │  │              │          
+│      │  │              ├─review
+│      │  │              │  ├─controller
+│      │  │              │  │      ReviewController.class
+│      │  │              │  │      
+│      │  │              │  ├─dao
+│      │  │              │  │      ReviewDAO.class
+│      │  │              │  │      ReviewDAOImple.class
+│      │  │              │  │      
+│      │  │              │  ├─domain
+│      │  │              │  │      ReviewDomain.class
+│      │  │              │  │      
+│      │  │              │  └─service
+│      │  │              │          ReviewService.class
+│      │  │              │          ReviewServiceImpl.class
+│      │  │              │          
+│      │  │              └─social
+│      │  │                  ├─controller
+│      │  │                  │      GoogleController.class
+│      │  │                  │      KakaoController.class
+│      │  │                  │      NaverController.class
+│      │  │                  │      
+│      │  │                  ├─dao
+│      │  │                  │      GoogleDAO.class
+│      │  │                  │      KakaoDAO.class
+│      │  │                  │      NaverDAO.class
+│      │  │                  │      
+│      │  │                  └─service
+│      │  │                          GoogleService.class
+│      │  │                          KakaoService.class
+│      │  │                          NaverService.class
+│      │  │                          
+│      │  ├─resources
+│      │  │  ├─META-INF
+│      │  │  │      additional-spring-configuration-metadata.json
+│      │  │  │      
+│      │  │  └─mybatis
+│      │  │      ├─mappers
+│      │  │      │      basket.xml
+│      │  │      │      board.xml
+│      │  │      │      bookMark.xml
+│      │  │      │      cre.xml
+│      │  │      │      delivery.xml
+│      │  │      │      follow.xml
+│      │  │      │      like.xml
+│      │  │      │      main.xml
+│      │  │      │      member.xml
+│      │  │      │      myBoard.xml
+│      │  │      │      notice.xml
+│      │  │      │      order.xml
+│      │  │      │      point.xml
+│      │  │      │      product.xml
+│      │  │      │      question.xml
+│      │  │      │      reply.xml
+│      │  │      │      review.xml
+│      │  │      │      social.xml
+│      │  │      │      wishList.xml
+│      │  │      │      
+│      │  │      └─model
+│      │  │              modelConfig.xml
+│      │  │              
+│      │  └─webapp
+│      │      ├─META-INF
+│      │      │      MANIFEST.MF
+│      │      │      
+│      │      ├─resources
+│      │      │  └─image
+│      │      │          .png
+│      │      │          alarm.png
+│      │      │          banner1.png
+│      │      │          banner2.png
+│      │      │          banner3.png
+│      │      │          banner4.png
+│      │      │          banner5.png
+│      │      │          banner6.png
+│      │      │          banner7.png
+│      │      │          basket.png
+│      │      │          bookMark.png
+│      │      │          bottombanner.png
+│      │      │          categori1.png
+│      │      │          categori2.png
+│      │      │          categori3.png
+│      │      │          categori4.png
+│      │      │          categori5.png
+│      │      │          categori6.png
+│      │      │          categori7.png
+│      │      │          categori8.png
+│      │      │          coupon.png
+│      │      │          downRightArrow.png
+│      │      │          faceBook.png
+│      │      │          Google_icon.png
+│      │      │          iconStar1.png
+│      │      │          iconStar2.png
+│      │      │          instagram.png
+│      │      │          Kakaotalk_icon.png
+│      │      │          like.png
+│      │      │          link_round.png
+│      │      │          mypage.png
+│      │      │          naeilhomeLogo1.png
+│      │      │          naeilhomeLogo2.png
+│      │      │          naeilhomeLogo3.png
+│      │      │          naeilhomeLogo4.png
+│      │      │          Naver_icon.png
+│      │      │          next.png
+│      │      │          prev.png
+│      │      │          product.png
+│      │      │          search.png
+│      │      │          topbanner.png
+│      │      │          wishList.png
+│      │      │          youtube.png
+│      │      │          
+│      │      └─WEB-INF
+│      │          ├─tiles
+│      │          │      tiles_login.xml
+│      │          │      tiles_naeilhome.xml
+│      │          │      tiles_naeilhomeMyPage.xml
+│      │          │      
+│      │          └─views
+│      │              │  main.jsp
+│      │              │  searchResult.jsp
+│      │              │  
+│      │              ├─basket
+│      │              │      myBasket.jsp
+│      │              │      
+│      │              ├─board
+│      │              │  ├─board_myhome
+│      │              │  │      myHomeForm.jsp
+│      │              │  │      myHomeList.jsp
+│      │              │  │      myHomeListFragment.jsp
+│      │              │  │      myHomeModForm.jsp
+│      │              │  │      myHomeSelect.jsp
+│      │              │  │      
+│      │              │  ├─board_notice
+│      │              │  │      noticeMain.jsp
+│      │              │  │      
+│      │              │  └─board_question
+│      │              │          FAQList.jsp
+│      │              │          myQuestionList.jsp
+│      │              │          questionForm.jsp
+│      │              │          questionSelect.jsp
+│      │              │          
+│      │              ├─common
+│      │              │      footer.jsp
+│      │              │      header.jsp
+│      │              │      layout.jsp
+│      │              │      loginLayout.jsp
+│      │              │      myPageLayout.jsp
+│      │              │      myPageSide.jsp
+│      │              │      
+│      │              ├─cre
+│      │              │      creForm.jsp
+│      │              │      
+│      │              ├─member
+│      │              │      changePassword.jsp
+│      │              │      checkId.jsp
+│      │              │      checkPw.jsp
+│      │              │      findId.jsp
+│      │              │      findPw.jsp
+│      │              │      loginForm.jsp
+│      │              │      memberDeleteLastCh.jsp
+│      │              │      memberDeletePwd.jsp
+│      │              │      memberForm.jsp
+│      │              │      memberModifyForm.jsp
+│      │              │      
+│      │              ├─mypage
+│      │              │  ├─bookmark
+│      │              │  │      bookMarkList.jsp
+│      │              │  │      
+│      │              │  ├─delivery
+│      │              │  │      deliveryList.jsp
+│      │              │  │      
+│      │              │  ├─follow
+│      │              │  │      follower.jsp
+│      │              │  │      following.jsp
+│      │              │  │      
+│      │              │  ├─like
+│      │              │  │      likeList.jsp
+│      │              │  │      
+│      │              │  ├─myhome
+│      │              │  │      myPageMyHomeList.jsp
+│      │              │  │      yoruPageMyHomeList.jsp
+│      │              │  │      
+│      │              │  ├─point
+│      │              │  │      pointList.jsp
+│      │              │  │      
+│      │              │  └─wishlist
+│      │              │          wishList.jsp
+│      │              │          
+│      │              ├─order
+│      │              │      addOrder.jsp
+│      │              │      payComplete.jsp
+│      │              │      
+│      │              ├─product
+│      │              │      productList.jsp
+│      │              │      selectProduct.jsp
+│      │              │      
+│      │              └─review
+│      │                      myReviewList.jsp
+│      │                      reviewForm.jsp
+│      │                      
+│      └─test
+│          └─java
+│              └─com
+│                  └─spring
+│                      └─gami
+│                              GamiApplicationTests.class
+│                              
+└─src
+    ├─main
+    │  ├─java
+    │  │  └─com
+    │  │      └─spring
+    │  │          └─naeilhome
+    │  │              │  NaeilhomeApplication.java
+    │  │              │  
+    │  │              ├─basket
+    │  │              │  ├─controller
+    │  │              │  │      BasketController.java
+    │  │              │  │      
+    │  │              │  ├─dao
+    │  │              │  │      BasketDAO.java
+    │  │              │  │      BasketDAOImpl.java
+    │  │              │  │      
+    │  │              │  ├─domain
+    │  │              │  │      BasketDomain.java
+    │  │              │  │      
+    │  │              │  ├─service
+    │  │              │  │      BasketService.java
+    │  │              │  │      BasketServiceImpl.java
+    │  │              │  │      
+    │  │              │  └─vo
+    │  │              │          BasketVO.java
+    │  │              │          
+    │  │              ├─board
+    │  │              │  ├─board_myhome
+    │  │              │  │  ├─controller
+    │  │              │  │  │      MyhomeController.java
+    │  │              │  │  │      
+    │  │              │  │  ├─dao
+    │  │              │  │  │      MyhomeDAO.java
+    │  │              │  │  │      MyhomeDAOImpl.java
+    │  │              │  │  │      
+    │  │              │  │  ├─domain
+    │  │              │  │  │      MyhomeDomain.java
+    │  │              │  │  │      
+    │  │              │  │  └─service
+    │  │              │  │          MyhomeService.java
+    │  │              │  │          MyhomeServiceImpl.java
+    │  │              │  │          
+    │  │              │  ├─board_notice
+    │  │              │  │  ├─controller
+    │  │              │  │  │      NoticeController.java
+    │  │              │  │  │      
+    │  │              │  │  ├─dao
+    │  │              │  │  │      NoticeDAO.java
+    │  │              │  │  │      NoticeDAOImpl.java
+    │  │              │  │  │      
+    │  │              │  │  ├─domain
+    │  │              │  │  │      NoticeDomain.java
+    │  │              │  │  │      
+    │  │              │  │  └─service
+    │  │              │  │          NoticeService.java
+    │  │              │  │          NoticeServiceImpl.java
+    │  │              │  │          
+    │  │              │  ├─board_question
+    │  │              │  │  ├─controller
+    │  │              │  │  │      QuestionController.java
+    │  │              │  │  │      
+    │  │              │  │  ├─dao
+    │  │              │  │  │      QuestionDAO.java
+    │  │              │  │  │      QuestionDAOImpl.java
+    │  │              │  │  │      
+    │  │              │  │  ├─domain
+    │  │              │  │  │      QuestionDomain.java
+    │  │              │  │  │      
+    │  │              │  │  └─service
+    │  │              │  │          QuestionService.java
+    │  │              │  │          QuestionServiceImpl.java
+    │  │              │  │          
+    │  │              │  └─reply
+    │  │              │      ├─controller
+    │  │              │      │      ReplyController.java
+    │  │              │      │      
+    │  │              │      ├─dao
+    │  │              │      │      ReplyDAO.java
+    │  │              │      │      ReplyDAOImpl.java
+    │  │              │      │      
+    │  │              │      ├─domain
+    │  │              │      │      ReplyDomain.java
+    │  │              │      │      
+    │  │              │      └─service
+    │  │              │              ReplyService.java
+    │  │              │              ReplyServiceImpl.java
+    │  │              │              
+    │  │              ├─config
+    │  │              │      Configurations.java
+    │  │              │      MailConfig.java
+    │  │              │      WebConfig.java
+    │  │              │      
+    │  │              ├─cre
+    │  │              │  ├─controller
+    │  │              │  │      CREController.java
+    │  │              │  │      
+    │  │              │  ├─dao
+    │  │              │  │      CreDAO.java
+    │  │              │  │      CreDAOImpl.java
+    │  │              │  │      
+    │  │              │  ├─domain
+    │  │              │  │      CreDomain.java
+    │  │              │  │      
+    │  │              │  └─service
+    │  │              │          CreService.java
+    │  │              │          CreServiceImpl.java
+    │  │              │          
+    │  │              ├─image
+    │  │              │      ImageDomain.java
+    │  │              │      
+    │  │              ├─mail
+    │  │              │  ├─controller
+    │  │              │  │      MailController.java
+    │  │              │  │      
+    │  │              │  └─service
+    │  │              │          MailService.java
+    │  │              │          MailServiceImpl.java
+    │  │              │          
+    │  │              ├─main
+    │  │              │  ├─controller
+    │  │              │  │      MainController.java
+    │  │              │  │      
+    │  │              │  ├─dao
+    │  │              │  │      MainDAO.java
+    │  │              │  │      MainDAOImpl.java
+    │  │              │  │      
+    │  │              │  ├─domain
+    │  │              │  │      MainDomain.java
+    │  │              │  │      
+    │  │              │  └─service
+    │  │              │          MainService.java
+    │  │              │          MainServiceImpl.java
+    │  │              │          
+    │  │              ├─member
+    │  │              │  ├─controller
+    │  │              │  │      MemberController.java
+    │  │              │  │      
+    │  │              │  ├─dao
+    │  │              │  │      MemberDAO.java
+    │  │              │  │      MemberDAOImpl.java
+    │  │              │  │      
+    │  │              │  ├─domain
+    │  │              │  │      MemberDomain.java
+    │  │              │  │      
+    │  │              │  └─service
+    │  │              │          MemberService.java
+    │  │              │          MemberServiceImpl.java
+    │  │              │          
+    │  │              ├─mypage
+    │  │              │  ├─bookmark
+    │  │              │  │  ├─controller
+    │  │              │  │  │      BookMarkController.java
+    │  │              │  │  │      
+    │  │              │  │  ├─dao
+    │  │              │  │  │      BookMarkDAO.java
+    │  │              │  │  │      BookMarkDAOImpl.java
+    │  │              │  │  │      
+    │  │              │  │  ├─domain
+    │  │              │  │  │      BookMarkDomain.java
+    │  │              │  │  │      
+    │  │              │  │  └─service
+    │  │              │  │          BookMarkService.java
+    │  │              │  │          BookMarkServiceImpl.java
+    │  │              │  │          
+    │  │              │  ├─delivery
+    │  │              │  │  ├─controller
+    │  │              │  │  │      DeliveryController.java
+    │  │              │  │  │      
+    │  │              │  │  ├─dao
+    │  │              │  │  │      DeliveryDAO.java
+    │  │              │  │  │      DeliveryDAOImpl.java
+    │  │              │  │  │      
+    │  │              │  │  ├─domain
+    │  │              │  │  │      DeliveryDomain.java
+    │  │              │  │  │      
+    │  │              │  │  └─service
+    │  │              │  │          DeliveryService.java
+    │  │              │  │          DeliveryServiceImpl.java
+    │  │              │  │          
+    │  │              │  ├─follow
+    │  │              │  │  ├─controller
+    │  │              │  │  │      FollowController.java
+    │  │              │  │  │      
+    │  │              │  │  ├─dao
+    │  │              │  │  │      FollowDAO.java
+    │  │              │  │  │      FollowDAOImpl.java
+    │  │              │  │  │      
+    │  │              │  │  ├─domain
+    │  │              │  │  │      FollowDomain.java
+    │  │              │  │  │      
+    │  │              │  │  └─service
+    │  │              │  │          FollowService.java
+    │  │              │  │          FollowServiceImpl.java
+    │  │              │  │          
+    │  │              │  ├─like
+    │  │              │  │  ├─controller
+    │  │              │  │  │      LikeController.java
+    │  │              │  │  │      
+    │  │              │  │  ├─dao
+    │  │              │  │  │      LikeDAO.java
+    │  │              │  │  │      LikeDAOImpl.java
+    │  │              │  │  │      
+    │  │              │  │  └─service
+    │  │              │  │          LikeService.java
+    │  │              │  │          LikeServiceImpl.java
+    │  │              │  │          
+    │  │              │  ├─myhome
+    │  │              │  │  ├─controller
+    │  │              │  │  │      MyPageMyhomeController.java
+    │  │              │  │  │      
+    │  │              │  │  ├─dao
+    │  │              │  │  │      MyPageMyhomeDAO.java
+    │  │              │  │  │      MyPageMyhomeDAOImpl.java
+    │  │              │  │  │      
+    │  │              │  │  ├─domain
+    │  │              │  │  │      MyPageMyhomeDomain.java
+    │  │              │  │  │      
+    │  │              │  │  └─service
+    │  │              │  │          MyPageMyhomeService.java
+    │  │              │  │          MyPageMyhomeServiceImpl.java
+    │  │              │  │          
+    │  │              │  ├─point
+    │  │              │  │  ├─controller
+    │  │              │  │  │      PointController.java
+    │  │              │  │  │      
+    │  │              │  │  ├─dao
+    │  │              │  │  │      PointDAO.java
+    │  │              │  │  │      PointDAOImpl.java
+    │  │              │  │  │      
+    │  │              │  │  ├─domain
+    │  │              │  │  │      PointDomain.java
+    │  │              │  │  │      
+    │  │              │  │  └─service
+    │  │              │  │          PointService.java
+    │  │              │  │          PointServiceImpl.java
+    │  │              │  │          
+    │  │              │  └─wishlist
+    │  │              │      ├─controller
+    │  │              │      │      WishListController.java
+    │  │              │      │      
+    │  │              │      ├─dao
+    │  │              │      │      WishListDAO.java
+    │  │              │      │      WishListDAOImpl.java
+    │  │              │      │      
+    │  │              │      ├─domain
+    │  │              │      │      WishListDomain.java
+    │  │              │      │      
+    │  │              │      └─service
+    │  │              │              WishListService.java
+    │  │              │              WishListServiceImpl.java
+    │  │              │              
+    │  │              ├─order
+    │  │              │  ├─controller
+    │  │              │  │      OrderController.java
+    │  │              │  │      
+    │  │              │  ├─dao
+    │  │              │  │      OrderDAO.java
+    │  │              │  │      OrderDAOImpl.java
+    │  │              │  │      
+    │  │              │  ├─domain
+    │  │              │  │      OrderDomain.java
+    │  │              │  │      OrderJoinDomain.java
+    │  │              │  │      
+    │  │              │  └─service
+    │  │              │          OrderService.java
+    │  │              │          OrderServiceImpl.java
+    │  │              │          
+    │  │              ├─product
+    │  │              │  ├─controller
+    │  │              │  │      ProductController.java
+    │  │              │  │      
+    │  │              │  ├─dao
+    │  │              │  │      ProductDAO.java
+    │  │              │  │      ProductDAOImpl.java
+    │  │              │  │      
+    │  │              │  ├─domain
+    │  │              │  │      ProductDomain.java
+    │  │              │  │      
+    │  │              │  └─service
+    │  │              │          ProductService.java
+    │  │              │          ProductServiceimpl.java
+    │  │              │          
+    │  │              ├─review
+    │  │              │  ├─controller
+    │  │              │  │      ReviewController.java
+    │  │              │  │      
+    │  │              │  ├─dao
+    │  │              │  │      ReviewDAO.java
+    │  │              │  │      ReviewDAOImple.java
+    │  │              │  │      
+    │  │              │  ├─domain
+    │  │              │  │      ReviewDomain.java
+    │  │              │  │      
+    │  │              │  └─service
+    │  │              │          ReviewService.java
+    │  │              │          ReviewServiceImpl.java
+    │  │              │          
+    │  │              └─social
+    │  │                  ├─controller
+    │  │                  │      GoogleController.java
+    │  │                  │      KakaoController.java
+    │  │                  │      NaverController.java
+    │  │                  │      
+    │  │                  ├─dao
+    │  │                  │      GoogleDAO.java
+    │  │                  │      KakaoDAO.java
+    │  │                  │      NaverDAO.java
+    │  │                  │      
+    │  │                  └─service
+    │  │                          GoogleService.java
+    │  │                          KakaoService.java
+    │  │                          NaverService.java
+    │  │                          
+    │  ├─resources
+    │  │  ├─META-INF
+    │  │  │      additional-spring-configuration-metadata.json
+    │  │  │      
+    │  │  └─mybatis
+    │  │      ├─mappers
+    │  │      │      basket.xml
+    │  │      │      board.xml
+    │  │      │      bookMark.xml
+    │  │      │      cre.xml
+    │  │      │      delivery.xml
+    │  │      │      follow.xml
+    │  │      │      like.xml
+    │  │      │      main.xml
+    │  │      │      member.xml
+    │  │      │      myBoard.xml
+    │  │      │      notice.xml
+    │  │      │      order.xml
+    │  │      │      point.xml
+    │  │      │      product.xml
+    │  │      │      question.xml
+    │  │      │      reply.xml
+    │  │      │      review.xml
+    │  │      │      social.xml
+    │  │      │      wishList.xml
+    │  │      │      
+    │  │      └─model
+    │  │              modelConfig.xml
+    │  │              
+    │  └─webapp
+    │      ├─META-INF
+    │      │      MANIFEST.MF
+    │      │      
+    │      ├─resources
+    │      │  └─image
+    │      │          .png
+    │      │          alarm.png
+    │      │          banner1.png
+    │      │          banner2.png
+    │      │          banner3.png
+    │      │          banner4.png
+    │      │          banner5.png
+    │      │          banner6.png
+    │      │          banner7.png
+    │      │          basket.png
+    │      │          bookMark.png
+    │      │          bottombanner.png
+    │      │          categori1.png
+    │      │          categori2.png
+    │      │          categori3.png
+    │      │          categori4.png
+    │      │          categori5.png
+    │      │          categori6.png
+    │      │          categori7.png
+    │      │          categori8.png
+    │      │          coupon.png
+    │      │          downRightArrow.png
+    │      │          faceBook.png
+    │      │          Google_icon.png
+    │      │          iconStar1.png
+    │      │          iconStar2.png
+    │      │          instagram.png
+    │      │          Kakaotalk_icon.png
+    │      │          like.png
+    │      │          link_round.png
+    │      │          mypage.png
+    │      │          naeilhomeLogo1.png
+    │      │          naeilhomeLogo2.png
+    │      │          naeilhomeLogo3.png
+    │      │          naeilhomeLogo4.png
+    │      │          Naver_icon.png
+    │      │          next.png
+    │      │          prev.png
+    │      │          product.png
+    │      │          search.png
+    │      │          topbanner.png
+    │      │          wishList.png
+    │      │          youtube.png
+    │      │          
+    │      └─WEB-INF
+    │          ├─tiles
+    │          │      tiles_login.xml
+    │          │      tiles_naeilhome.xml
+    │          │      tiles_naeilhomeMyPage.xml
+    │          │      
+    │          └─views
+    │              │  main.jsp
+    │              │  searchResult.jsp
+    │              │  
+    │              ├─basket
+    │              │      myBasket.jsp
+    │              │      
+    │              ├─board
+    │              │  ├─board_myhome
+    │              │  │      myHomeForm.jsp
+    │              │  │      myHomeList.jsp
+    │              │  │      myHomeListFragment.jsp
+    │              │  │      myHomeModForm.jsp
+    │              │  │      myHomeSelect.jsp
+    │              │  │      
+    │              │  ├─board_notice
+    │              │  │      noticeMain.jsp
+    │              │  │      
+    │              │  └─board_question
+    │              │          FAQList.jsp
+    │              │          myQuestionList.jsp
+    │              │          questionForm.jsp
+    │              │          questionSelect.jsp
+    │              │          
+    │              ├─common
+    │              │      footer.jsp
+    │              │      header.jsp
+    │              │      layout.jsp
+    │              │      loginLayout.jsp
+    │              │      myPageLayout.jsp
+    │              │      myPageSide.jsp
+    │              │      
+    │              ├─cre
+    │              │      creForm.jsp
+    │              │      
+    │              ├─member
+    │              │      changePassword.jsp
+    │              │      checkId.jsp
+    │              │      checkPw.jsp
+    │              │      findId.jsp
+    │              │      findPw.jsp
+    │              │      loginForm.jsp
+    │              │      memberDeleteLastCh.jsp
+    │              │      memberDeletePwd.jsp
+    │              │      memberForm.jsp
+    │              │      memberModifyForm.jsp
+    │              │      
+    │              ├─mypage
+    │              │  ├─bookmark
+    │              │  │      bookMarkList.jsp
+    │              │  │      
+    │              │  ├─delivery
+    │              │  │      deliveryList.jsp
+    │              │  │      
+    │              │  ├─follow
+    │              │  │      follower.jsp
+    │              │  │      following.jsp
+    │              │  │      
+    │              │  ├─like
+    │              │  │      likeList.jsp
+    │              │  │      
+    │              │  ├─myhome
+    │              │  │      myPageMyHomeList.jsp
+    │              │  │      yoruPageMyHomeList.jsp
+    │              │  │      
+    │              │  ├─point
+    │              │  │      pointList.jsp
+    │              │  │      
+    │              │  └─wishlist
+    │              │          wishList.jsp
+    │              │          
+    │              ├─order
+    │              │      addOrder.jsp
+    │              │      payComplete.jsp
+    │              │      
+    │              ├─product
+    │              │      productList.jsp
+    │              │      selectProduct.jsp
+    │              │      
+    │              └─review
+    │                      myReviewList.jsp
+    │                      reviewForm.jsp
+    │                      
+    └─test
+        └─java
+            └─com
+                └─spring
+                    └─gami
+                            GamiApplicationTests.java
