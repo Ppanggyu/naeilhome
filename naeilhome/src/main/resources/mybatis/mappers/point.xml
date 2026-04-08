@@ -3,92 +3,135 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.point">
+<mapper namespace="mapper.product">
 
-    <!-- ResultMap 정의 -->
-    <resultMap id="pointResult" type="PointDomain">
-        <result property="memberId" column="memberId" />
-        <result property="pointEarned" column="pointEarned" />
-        <result property="pointDeduct" column="pointDeduct" />
-        <result property="pointRemain" column="pointRemain" />
-        
-        <result property="joinNo" column="joinNo" />
-        <result property="orderJoinDate" column="orderJoinDate" />
+    <!-- Product ResultMap -->
+    <resultMap id="productResult" type="productDomain">
+        <result property="recNum" column="recNum" />
+        <result property="productNO" column="productNO" />
+        <result property="productCategory" column="productCategory" />
+        <result property="imageFileName" column="imageFileName" />
         <result property="productName" column="productName" />
-        <result property="productPoint" column="productPoint" />
-        
-        <result property="orderDate" column="orderDate" />
-        
-        <result property="reviewUpdated" column="reviewUpdated" />
-        <result property="reviewContents" column="reviewContents" />
-        
-        <result property="memberJoindate" column="memberJoindate" />
+        <result property="productDescription" column="productDescription" />
+        <result property="productPrice" column="productPrice" />
+        <result property="productQty" column="productQty" />
+        <result property="productUpdated" column="productUpdated" />
+        <result property="productOptions" column="productOptions" />
     </resultMap>
-    
-    <!-- 사용 가능한 포인트 조회 -->
-    <select id="selectPointByMemberId" resultMap="pointResult" parameterType="String">
-        <![CDATA[
-            SELECT memberId, pointEarned, pointDeduct, pointRemain
-            FROM point
-            WHERE memberId = #{memberId}
-        ]]>
+
+    <!-- Image ResultMap -->
+    <resultMap id="productImage" type="imageDomain">
+        <result property="imageNO" column="imageNO" />
+        <result property="articleNO" column="articleNO" />
+        <result property="imageFilename" column="imageFilename" />
+        <result property="imageUpdated" column="imageUpdated" />
+        <result property="imageType" column="imageType" />
+    </resultMap>
+
+    <!-- 상품 이미지 조회 -->
+    <select id="selectAllProductImage" resultType="imageDomain" parameterType="int">
+        SELECT * FROM image 
+        WHERE imageType = '상품' 
+          AND articleNO = #{articleNO}
     </select>
-    
-    <!-- 구매확정 포인트 내역 (+) -->
-    <select id="selectPointPlusHistory" resultMap="pointResult" parameterType="String">
-        <![CDATA[
-            SELECT 
-                o.joinNo,
-                oj.orderJoinDate,
-                p.productName,
-                ROUND(oj.orderAmount * 0.01) AS productPoint
-            FROM orders o
-            JOIN ordersJoin oj ON o.joinNo = oj.joinNo
-            JOIN product p ON oj.productNo = p.productNo
-            WHERE o.memberId = #{memberId}
-              AND oj.orderStatement = '구매확정'
-            ORDER BY oj.orderJoinDate DESC
-        ]]>
+
+    <!-- 상품 목록 + 이미지 1개 -->
+    <select id="selectAllProduct" resultType="productDomain" parameterType="map">
+        SELECT * FROM (
+            SELECT ROW_NUMBER() OVER (ORDER BY p.productNO ASC) AS recNum,
+                   p.productNO, p.productCategory, p.productName, p.productDescription, p.productPrice,
+                   p.productQty, p.productUpdated, p.productOptions,
+                   i.imageFilename
+            FROM product p
+            LEFT JOIN LATERAL (
+                SELECT imageFilename
+                FROM image
+                WHERE articleNO = p.productNO
+                  AND imageType = '상품'
+                ORDER BY imageNO ASC
+                LIMIT 1
+            ) i ON true
+            <if test="all == 'all'">
+                <if test="category != null">
+                    WHERE p.productCategory = #{category}
+                </if>
+            </if>
+        ) sub
+        WHERE recNum BETWEEN ((#{section}-1)+(#{pageNum}-1)*20+1) AND ((#{section}-1)+#{pageNum}*20)
     </select>
-    
-    <!-- 사용 포인트 내역 (-) -->
-    <select id="selectPointMinusHistory" resultMap="pointResult" parameterType="String">
-        <![CDATA[
-            SELECT 
-                o.joinNo,
-                o.orderDate,
-                p.productName,
-                oj.orderPoints AS productPoint
-            FROM orders o
-            JOIN ordersJoin oj ON o.joinNo = oj.joinNo
-            JOIN product p ON oj.productNo = p.productNo
-            WHERE o.memberId = #{memberId}
-              AND oj.orderPoints != 0
-            ORDER BY oj.orderJoinDate DESC
-        ]]>
+
+    <!-- 상품 총 개수 -->
+    <select id="allProductCount" resultType="int" parameterType="map">
+        SELECT COUNT(*) FROM (
+            SELECT ROW_NUMBER() OVER (PARTITION BY productName ORDER BY productNO ASC) AS rn, productCategory
+            FROM product
+        ) sub
+        WHERE rn = 1
+        <if test="all == 'all'">
+            <if test="category != null">
+                AND productCategory = #{category}
+            </if>
+        </if>
     </select>
-    
-    <!-- 리뷰 작성 포인트 (+150P) -->
-    <select id="selectPointReview" resultMap="pointResult" parameterType="String">
-        <![CDATA[
-            SELECT reviewUpdated,
-                   CASE 
-                     WHEN CHAR_LENGTH(reviewContents) > 20 
-                     THEN SUBSTRING(reviewContents FROM 1 FOR 20) || '...'
-                     ELSE reviewContents
-                   END AS reviewContents
-            FROM review
-            WHERE memberId = #{memberId}
-        ]]>
+
+    <!-- 특정 상품 조회 -->
+    <select id="selectProduct" resultType="productDomain" parameterType="String">
+        SELECT * FROM product
+        WHERE productName = #{productName}
     </select>
-    
-    <!-- 회원가입 포인트 (+1000P) -->
-    <select id="newMembergood" resultMap="pointResult" parameterType="String">
-        <![CDATA[
-            SELECT memberJoindate
-            FROM member
-            WHERE memberId = #{memberId}
-        ]]>
+
+    <!-- 상품 상세페이지 썸네일 -->
+    <select id="selectThumnail" resultType="imageDomain" parameterType="int">
+        SELECT * FROM image
+        WHERE imageType = '상품' AND articleNO = #{productNO}
+        ORDER BY imageNO ASC
+        LIMIT 1
     </select>
-  
+
+    <!-- 상품 상세페이지 나머지 이미지 -->
+    <select id="selectThumnailTwo" resultType="imageDomain" parameterType="int">
+        SELECT * FROM image
+        WHERE articleNO = #{productNO}
+          AND imageType = '상품'
+          AND imageNO NOT IN (
+              SELECT imageNO FROM image
+              WHERE articleNO = #{productNO} AND imageType = '상품'
+              ORDER BY imageNO ASC
+              LIMIT 1
+          )
+        ORDER BY imageNO ASC
+    </select>
+
+    <!-- 상품 검색 -->
+    <select id="searchingProd" resultType="productDomain" parameterType="String">
+        SELECT p.productNO, p.productName, p.productDescription, p.productPrice, i.imageFilename
+        FROM (
+            SELECT productNO, productName, productDescription, productPrice,
+                   ROW_NUMBER() OVER (PARTITION BY productName ORDER BY productOptions) AS rn
+            FROM product
+        ) p
+        LEFT JOIN (
+            SELECT articleNO, MIN(imageFilename) AS imageFilename
+            FROM image
+            WHERE imageType = '상품'
+            GROUP BY articleNO
+        ) i ON p.productNO = i.articleNO
+        WHERE p.rn = 1
+          AND p.productName LIKE '%' || #{keyword} || '%'
+    </select>
+
+    <!-- 문의사항 상품 불러오기 -->
+    <select id="selectProductByNo" parameterType="int" resultMap="productResult">
+        SELECT p.productNO, p.productCategory, p.productName, p.productDescription,
+               p.productPrice, p.productQty, p.productUpdated, p.productOptions,
+               (SELECT imageFilename 
+                  FROM image 
+                  WHERE articleNO = p.productNO
+                    AND imageType = '상품'
+                  ORDER BY imageNO ASC
+                  LIMIT 1) AS imageFileName
+        FROM product p
+        WHERE p.productNO = #{productNO}
+    </select>
+
 </mapper>
