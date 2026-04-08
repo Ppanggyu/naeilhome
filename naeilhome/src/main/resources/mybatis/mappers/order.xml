@@ -3,92 +3,170 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.point">
-
-    <!-- ResultMap 정의 -->
-    <resultMap id="pointResult" type="PointDomain">
+<mapper namespace="mapper.order">
+    <!-- 회원정보 조회 -->
+    <resultMap id="orderResult" type="OrderDomain">
+        <result property="orderNo" column="orderNo" />
         <result property="memberId" column="memberId" />
-        <result property="pointEarned" column="pointEarned" />
-        <result property="pointDeduct" column="pointDeduct" />
-        <result property="pointRemain" column="pointRemain" />
-        
-        <result property="joinNo" column="joinNo" />
-        <result property="orderJoinDate" column="orderJoinDate" />
-        <result property="productName" column="productName" />
+        <result property="productNo" column="productNo" />
+        <result property="orderProductOptions" column="orderProductOptions" />
+        <result property="orderReceiver" column="orderReceiver" />
+        <result property="orderReceiverPhone1" column="orderReceiverPhone1" />
+        <result property="orderReceiverPhone2" column="orderReceiverPhone2" />
+        <result property="orderReceiverPhone3" column="orderReceiverPhone3" />
+        <result property="orderReceiverEmail1" column="orderReceiverEmail1" />
+        <result property="orderReceiverEmail2" column="orderReceiverEmail2" />
+        <result property="orderZip1" column="orderZip1" />
+        <result property="orderZip2" column="orderZip2" />
+        <result property="orderZip3" column="orderZip3" />
+        <result property="orderMessage" column="orderMessage" />
+        <result property="orderPoints" column="orderPoints" />
+        <result property="orderCoupon" column="orderCoupon" />
+        <result property="orderDate" column="orderDate" jdbcType="TIMESTAMP"/>
+        <result property="orderQty" column="orderQty" />
+        <result property="orderAmount" column="orderAmount" />
+        <result property="orderPaytype" column="orderPaytype" />
         <result property="productPoint" column="productPoint" />
-        
-        <result property="orderDate" column="orderDate" />
-        
-        <result property="reviewUpdated" column="reviewUpdated" />
-        <result property="reviewContents" column="reviewContents" />
-        
-        <result property="memberJoindate" column="memberJoindate" />
+        <result property="orderStatement" column="orderStatement" /> 
+        <result property="joinNo" column="joinNo" />  
+        <result property="pointRemain" column="pointRemain" /> 
+    </resultMap> 
+    
+    <!-- 상품정보 조회 -->
+    <resultMap id="productResult" type="OrderDomain">
+        <result property="productNo" column="productNo" />
+        <result property="productName" column="productName" />
+        <result property="orderProductOptions" column="orderProductOptions" />
+        <result property="productPrice" column="productPrice" />
+        <result property="imageFileName" column="imageFileName" />
     </resultMap>
     
-    <!-- 사용 가능한 포인트 조회 -->
-    <select id="selectPointByMemberId" resultMap="pointResult" parameterType="String">
+    <!-- 로그인한 회원의 정보를 조회 -->
+    <select id="loginById" resultMap="orderResult" parameterType="string">
         <![CDATA[
-            SELECT memberId, pointEarned, pointDeduct, pointRemain
-            FROM point
-            WHERE memberId = #{memberId}
+        SELECT 
+            m.memberId, 
+            m.memberName AS orderReceiver, 
+            m.memberPhone1 AS orderReceiverPhone1, 
+            m.memberPhone2 AS orderReceiverPhone2, 
+            m.memberPhone3 AS orderReceiverPhone3, 
+            m.memberEmail1 AS orderReceiverEmail1, 
+            m.memberEmail2 AS orderReceiverEmail2, 
+            m.memberZip1 AS orderZip1, 
+            m.memberZip2 AS orderZip2, 
+            m.memberZip3 AS orderZip3, 
+            p.pointRemain 
+        FROM member m 
+        LEFT JOIN point p ON m.memberId = p.memberId 
+        WHERE m.memberId = #{memberId} 
         ]]>
     </select>
     
-    <!-- 구매확정 포인트 내역 (+) -->
-    <select id="selectPointPlusHistory" resultMap="pointResult" parameterType="String">
+    <!-- 상품정보 조회 (상품번호로 조회) -->
+    <select id="getProductInfo" resultMap="productResult" parameterType="int">
         <![CDATA[
-            SELECT 
-                o.joinNo,
-                oj.orderJoinDate,
-                p.productName,
-                ROUND(oj.orderAmount * 0.01) AS productPoint
-            FROM orders o
-            JOIN ordersJoin oj ON o.joinNo = oj.joinNo
-            JOIN product p ON oj.productNo = p.productNo
-            WHERE o.memberId = #{memberId}
-              AND oj.orderStatement = '구매확정'
-            ORDER BY oj.orderJoinDate DESC
+        SELECT 
+            productNo,
+            productName,
+            productOptions AS orderProductOptions,
+            productQty,
+            productPrice,
+            image.imageFilename AS imageFileName
+        FROM product
+        JOIN image ON product.productNo = image.articleNo
+        WHERE productNo = #{productNo}
+        LIMIT 1
         ]]>
     </select>
     
-    <!-- 사용 포인트 내역 (-) -->
-    <select id="selectPointMinusHistory" resultMap="pointResult" parameterType="String">
+    <!-- 상품정보 조회 (basket테이블에서 가져오기) -->
+    <select id="getBasketInfo" resultMap="productResult" parameterType="OrderDomain">
         <![CDATA[
-            SELECT 
-                o.joinNo,
-                o.orderDate,
-                p.productName,
-                oj.orderPoints AS productPoint
-            FROM orders o
-            JOIN ordersJoin oj ON o.joinNo = oj.joinNo
-            JOIN product p ON oj.productNo = p.productNo
-            WHERE o.memberId = #{memberId}
-              AND oj.orderPoints != 0
-            ORDER BY oj.orderJoinDate DESC
+        SELECT b.productNo, p.productPrice, p.productName, b.basketProductOptions AS orderProductOptions,
+               b.basketProductQty AS orderQty, i.imageFilename AS imageFileName
+        FROM product p
+        JOIN basket b ON b.productNo = p.productNo
+        JOIN (
+            SELECT imageFilename, articleNo
+            FROM (
+                SELECT imageNo, articleNo, imageFilename, imageType,
+                       ROW_NUMBER() OVER (PARTITION BY articleNo ORDER BY imageNo ASC) AS rn
+                FROM image
+            ) AS img
+            WHERE rn = 1
+        ) i ON i.articleNo = p.productNo
+        WHERE b.memberId = #{memberId}
+          AND b.productNo = #{productNo}
         ]]>
     </select>
     
-    <!-- 리뷰 작성 포인트 (+150P) -->
-    <select id="selectPointReview" resultMap="pointResult" parameterType="String">
+    <!-- 주문정보 삽입 -->
+    <insert id="insertOrder" parameterType="OrderDomain">
+        <selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
+            SELECT nextval('orders_seq')
+        </selectKey>
         <![CDATA[
-            SELECT reviewUpdated,
-                   CASE 
-                     WHEN CHAR_LENGTH(reviewContents) > 20 
-                     THEN SUBSTRING(reviewContents FROM 1 FOR 20) || '...'
-                     ELSE reviewContents
-                   END AS reviewContents
-            FROM review
-            WHERE memberId = #{memberId}
+        INSERT INTO orders (
+            orderNo,
+            memberId,
+            orderReceiver,
+            orderReceiverPhone1,
+            orderReceiverPhone2,
+            orderReceiverPhone3,
+            orderReceiverEmail1,
+            orderReceiverEmail2,
+            orderZip1,
+            orderZip2,
+            orderZip3,
+            orderMessage,
+            orderDate,
+            orderPaytype,
+            productPoint,
+            joinNo
+        )
+        VALUES (
+            #{orderNo},
+            #{memberId},
+            #{orderReceiver},
+            #{orderReceiverPhone1},
+            #{orderReceiverPhone2},
+            #{orderReceiverPhone3},
+            #{orderReceiverEmail1},
+            #{orderReceiverEmail2},
+            #{orderZip1},
+            #{orderZip2},
+            #{orderZip3},
+            #{orderMessage},
+            NOW(),
+            #{orderPaytype},
+            #{productPoint},
+            #{orderNo}
+        )
         ]]>
-    </select>
+    </insert>
     
-    <!-- 회원가입 포인트 (+1000P) -->
-    <select id="newMembergood" resultMap="pointResult" parameterType="String">
+    <!-- 주문 상품 삽입 -->
+    <insert id="insertOrdersJoin" parameterType="OrderJoinDomain">
         <![CDATA[
-            SELECT memberJoindate
-            FROM member
-            WHERE memberId = #{memberId}
+        INSERT INTO ordersJoin (
+            joinNo,
+            productNo,
+            orderProductOptions,
+            orderQty,
+            orderPoints,
+            orderAmount,
+            orderStatement
+        )
+        VALUES (
+            #{joinNo},
+            #{productNo},
+            #{orderProductOptions},
+            #{orderQty},
+            #{orderPoints},
+            #{orderAmount},
+            #{orderStatement}
+        )
         ]]>
-    </select>
-  
+    </insert>
+    
 </mapper>
