@@ -1,10 +1,8 @@
 package com.spring.naeilhome.basket.domain;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
 
-import oracle.sql.DATE;
+import java.sql.Date;
 
 @Component("basketDomain")
 public class BasketDomain {
