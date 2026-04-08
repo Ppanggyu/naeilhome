@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.spring.naeilhome.basket.domain.BasketDomain;
 import com.spring.naeilhome.basket.vo.BasketVO;
 
-@Repository("basketDAO")
+@Repository("basketDAO") 
 @Transactional // 오류 발생 시 롤백
 public class BasketDAOImpl implements BasketDAO {
 
