@@ -7,7 +7,9 @@ import org.springframework.dao.DataAccessException;
 
 import com.spring.naeilhome.image.ImageDomain;
 import com.spring.naeilhome.product.domain.ProductDomain;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ProductDAO {
 	
 	// 상품 목록
