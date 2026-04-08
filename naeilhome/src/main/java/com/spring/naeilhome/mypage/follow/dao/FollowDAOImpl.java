@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.spring.naeilhome.member.domain.MemberDomain;
 import com.spring.naeilhome.mypage.follow.domain.FollowDomain;
 
-@Repository("FollowDAO")
+@Repository("followDAO")
 public class FollowDAOImpl implements FollowDAO{
 
 	@Autowired
