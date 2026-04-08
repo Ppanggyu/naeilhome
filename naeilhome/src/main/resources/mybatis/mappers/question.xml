@@ -30,7 +30,7 @@
                     boardQuestionParentNO, 
                     boardQuestionType1, 
                     boardQuestionType2)
-        VALUES (nexval('QUESTION_SEQ'), 
+        VALUES (nexval('question_seq'), 
                 #{productNo}, 
                 #{writerId}, 
                 #{boardQuestionContents}, 
