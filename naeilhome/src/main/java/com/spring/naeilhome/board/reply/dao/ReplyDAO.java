@@ -6,9 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.spring.naeilhome.board.reply.domain.ReplyDomain;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface ReplyDAO {
 
 	public void addReply(ReplyDomain replyDomain) throws DataAccessException;
