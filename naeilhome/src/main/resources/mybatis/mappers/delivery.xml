@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="mapper.delivery">
+
+    <!-- Result Map 정의 -->
     <resultMap id="deliveryResult" type="deliveryDomain">
         <result property="deliveryNO" column="deliveryNO"/>
         <result property="memberId" column="memberId"/>
@@ -11,76 +13,82 @@
         <result property="deliveryStatus" column="deliveryStatus"/>
         <result property="deliveryStart" column="deliveryStart"/>
         <result property="deliveryEnd" column="deliveryEnd"/>
-               
         <result property="orderDate" column="orderDate"/>
-        
         <result property="joinNO" column="joinNO"/>
         <result property="productNO" column="productNO"/>
         <result property="orderProductOptions" column="orderProductOptions"/>
         <result property="orderQty" column="orderQty"/>
         <result property="orderAmount" column="orderAmount"/>
         <result property="orderStatement" column="orderStatement"/>
-        
         <result property="productName" column="productName"/>
         <result property="productDescription" column="productDescription"/>
-     	
         <result property="imageFilename" column="imageFilename"/>
-        
         <result property="status" column="status"/>
         <result property="orderCount" column="orderCount"/>
         <result property="deliveryCount" column="deliveryCount"/>
-        <result property="mi" column="mi"/>        
+        <result property="mi" column="mi"/>
     </resultMap>
-    
+
+    <!-- 주문 리스트 조회 -->
     <select id="ordersList" resultMap="deliveryResult" parameterType="String">
-		<![CDATA[    
-			SELECT o.orderDate, o.orderNO, o.memberId, j.joinNO , o.memberId, p.productName, j.productNO, j.orderProductOptions,
-					j.orderQty, j.orderAmount, j.orderStatement, d.deliveryStatus, i.imageFilename, NVL(r.memberId, 'null') AS mi
-			FROM orders o, ordersJoin j, (SELECT imageFilename, articleNO
-			                FROM (SELECT imageNO, articleNO, imageFilename, imageType,
-			                            ROW_NUMBER() OVER (PARTITION BY articleNO ORDER BY imageNO ASC) AS rn
-			                      FROM image)
-			                WHERE rn = 1) i, product p, delivery d, review r
-			WHERE o.joinNO = j.joinNO
-			AND o.memberId = #{memberId}
-			AND j.productNO = i.articleNO
-			AND p.productNO = j.productNO
-            AND j.joinno = d.joinNO(+)
-            AND j.productNO = d.productNO(+)
-            AND j.joinno = r.orderno(+)
-            AND j.productNO = r.productNO(+)
-			ORDER BY j.joinNO DESC
-		]]>
+        <![CDATA[
+            SELECT 
+                o.orderDate, o.orderNO, o.memberId, j.joinNO, p.productName, j.productNO, j.orderProductOptions,
+                j.orderQty, j.orderAmount, j.orderStatement, d.deliveryStatus, i.imageFilename,
+                COALESCE(r.memberId, 'null') AS mi
+            FROM orders o
+            JOIN ordersJoin j ON o.joinNO = j.joinNO
+            LEFT JOIN (
+                SELECT articleNO, imageFilename
+                FROM (
+                    SELECT imageNO, articleNO, imageFilename, imageType,
+                           ROW_NUMBER() OVER (PARTITION BY articleNO ORDER BY imageNO ASC) AS rn
+                    FROM image
+                ) t
+                WHERE rn = 1
+            ) i ON j.productNO = i.articleNO
+            JOIN product p ON j.productNO = p.productNO
+            LEFT JOIN delivery d ON j.joinNO = d.joinNO AND j.productNO = d.productNO
+            LEFT JOIN review r ON j.joinNO = r.orderNO AND j.productNO = r.productNO
+            WHERE o.memberId = #{memberId}
+            ORDER BY j.joinNO DESC
+        ]]>
     </select>
-    
+
+    <!-- 크레 신청 상품 조회 -->
     <select id="creProductApplication" resultMap="deliveryResult" parameterType="java.util.Map">
-	    <![CDATA[
-		    SELECT o.orderDate, o.orderNO, o.memberId, j.joinNO , o.memberId, p.productName, j.productNO, j.orderProductOptions,
-							j.orderQty, j.orderAmount, j.orderStatement, d.deliveryStatus, i.imageFilename
-					FROM orders o, ordersJoin j, (SELECT imageFilename, articleNO
-					                FROM (SELECT imageNO, articleNO, imageFilename, imageType,
-					                            ROW_NUMBER() OVER (PARTITION BY articleNO ORDER BY imageNO ASC) AS rn
-					                      FROM image)
-					                WHERE rn = 1) i, product p, delivery d
-					WHERE o.joinNO = j.joinNO
-					AND o.memberId = #{memberId}
-					AND j.productNO = i.articleNO
-					AND p.productNO = j.productNO
-		            AND o.orderNO = #{orderNO}
-		            AND j.productNO = #{productNO}
-		            AND j.joinno = d.joinNO(+)
-		            AND j.productNO = d.productNO(+)
-					ORDER BY j.joinNO
-		]]>
+        <![CDATA[
+            SELECT 
+                o.orderDate, o.orderNO, o.memberId, j.joinNO, p.productName, j.productNO, j.orderProductOptions,
+                j.orderQty, j.orderAmount, j.orderStatement, d.deliveryStatus, i.imageFilename
+            FROM orders o
+            JOIN ordersJoin j ON o.joinNO = j.joinNO
+            LEFT JOIN (
+                SELECT articleNO, imageFilename
+                FROM (
+                    SELECT imageNO, articleNO, imageFilename, imageType,
+                           ROW_NUMBER() OVER (PARTITION BY articleNO ORDER BY imageNO ASC) AS rn
+                    FROM image
+                ) t
+                WHERE rn = 1
+            ) i ON j.productNO = i.articleNO
+            JOIN product p ON j.productNO = p.productNO
+            LEFT JOIN delivery d ON j.joinNO = d.joinNO AND j.productNO = d.productNO
+            WHERE o.memberId = #{memberId}
+              AND o.orderNO = #{orderNO}
+              AND j.productNO = #{productNO}
+            ORDER BY j.joinNO
+        ]]>
     </select>
-    
+
+    <!-- 구매 완료 후 배송 상태 업데이트 -->
     <update id="buyCompleteDelivery" parameterType="java.util.Map">
-    	<![CDATA[
-    		UPDATE ordersJoin
-    		SET orderStatement = #{orderStatement}
-    		WHERE joinNo = #{orderNO}
-    		AND productNo = #{productNO}
-    	]]>
+        <![CDATA[
+            UPDATE ordersJoin
+            SET orderStatement = #{orderStatement}
+            WHERE joinNo = #{orderNO}
+              AND productNo = #{productNO}
+        ]]>
     </update>
-    
+
 </mapper>
