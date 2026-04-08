@@ -39,7 +39,7 @@
 	 <insert id="addReview" parameterType="reviewDomain">
 		 insert into review(reviewNo, memberId, orderNo, productNo, reviewContents, reviewUpdated,
 		 				  reviewStarAvg, reviewStarDurability, reviewStarPrice, reviewStarDesign, reviewStarDelivery, productName)
-		 values(review_seq.NEXTVAL, #{memberId}, #{orderNo}, #{productNo}, #{reviewContents}, SYSDATE,
+		 values(nexval('review_seq'), #{memberId}, #{orderNo}, #{productNo}, #{reviewContents}, SYSDATE,
 		 #{reviewStarAvg}, #{reviewStarDurability}, #{reviewStarPrice}, #{reviewStarDesign}, #{reviewStarDelivery},
 		 (SELECT productName FROM product WHERE productNo = #{productNo})
 		 )
@@ -53,7 +53,7 @@
     <!-- 리뷰 이미지 저장 -->
     <insert id="addImage" parameterType="map">
     insert into image (imageNo, articleNo, imageFilename, imageUpdated, imageType)
-    values (image_seq.NEXTVAL, #{articleNo}, #{imageFilename}, sysdate, #{imageType})
+    values (nexval('image_seq'), #{articleNo}, #{imageFilename}, sysdate, #{imageType})
 	</insert>
 	
 	<!-- 상세페이지에서 상품에 대한 모든 리뷰 조회 -->
