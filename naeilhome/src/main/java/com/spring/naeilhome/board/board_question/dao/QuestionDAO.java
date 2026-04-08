@@ -3,9 +3,7 @@ package com.spring.naeilhome.board.board_question.dao;
 import java.util.List;
 
 import com.spring.naeilhome.board.board_question.domain.QuestionDomain;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface QuestionDAO {
 	void insertQuestion(QuestionDomain questionDomain);
 
