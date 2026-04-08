@@ -6,9 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.spring.naeilhome.mypage.myhome.domain.MyPageMyhomeDomain;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface MyPageMyhomeDAO {
 
 	public List<MyPageMyhomeDomain> selectMyArticlesList(Map<String, Object> pagingMap)  throws DataAccessException;
