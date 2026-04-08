@@ -6,9 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.spring.naeilhome.product.domain.ProductDomain;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface WishListDAO {
 
 	int allwishListCount(String memberId) throws DataAccessException;
